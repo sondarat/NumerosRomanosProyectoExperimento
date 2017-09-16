@@ -16,9 +16,9 @@ public class RomanNumeralsEncoder {
      */
     public static void main(String[] args) {
         String sol = "";
-        int n = 19;
+        int n = 984;
         int contador = 0;
-        int auxiliar=0;
+        int auxiliar = 0;
         while ((n - 1000) > 0) {
             n = n - 1000;
 
@@ -30,6 +30,7 @@ public class RomanNumeralsEncoder {
             sol = sol + "M";
         }
         while ((n - 500) > 0) {
+            auxiliar = auxiliar + n;
             n = n - 500;
             contador = contador + 1;
 
@@ -39,14 +40,17 @@ public class RomanNumeralsEncoder {
             n = n - 500;
             sol = sol + "D";
         }
-        if (contador > 3) {
+        if (contador > 3 || auxiliar + 100 >= 1000) {
             sol = sol + "CM";
+            n = n - 400;
         } else {
             for (int x = 0; x < contador; x++) {
                 sol = sol + "D";
             }
-            contador = 0;
+
         }
+        contador = 0;
+        auxiliar = 0;
         while ((n - 100) > 0) {
             n = n - 100;
             contador = contador + 1;
@@ -61,81 +65,84 @@ public class RomanNumeralsEncoder {
             for (int x = 0; x < contador; x++) {
                 sol = sol + "C";
             }
-            contador = 0;
-            while ((n - 50) > 0) {
-                n = n - 50;
-                contador = contador + 1;
+        }
+        contador = 0;
+        while ((n - 50) > 0) {
+            auxiliar = auxiliar + n;
+            n = n - 50;
+            contador = contador + 1;
 
-            }
-            if (n - 50 == 0 && contador < 3) {
-                n = n - 50;
+        }
+        if (n - 50 == 0 && contador < 3) {
+            n = n - 50;
+            sol = sol + "L";
+        }
+        if (contador > 3 || auxiliar + 10 >= 100) {
+            sol = sol + "XC";
+            n = n - 40;
+        } else {
+            for (int x = 0; x < contador; x++) {
                 sol = sol + "L";
             }
-            if (contador > 3) {
-                sol = sol + "XC";
-            } else {
-                for (int x = 0; x < contador; x++) {
-                    sol = sol + "L";
-                }
-                contador = 0;
-                while ((n - 10) > 0) {
-                    n = n - 10;
-                    contador = contador + 1;
+        }
+        contador = 0;
+        auxiliar = 0;
+        while ((n - 10) > 0) {
+            n = n - 10;
+            contador = contador + 1;
 
-                }
-                if (n - 10 == 0 && contador < 3) {
-                    n = n - 10;
-                    sol = sol + "X";
-                }
-                if (contador > 3) {
-                    sol = sol + "XL";
-                } else {
-                    for (int x = 0; x < contador; x++) {
-                        sol = sol + "X";
-                    }
-                }
-                contador = 0;
-                while ((n - 5) > 0) {
-                    auxiliar=auxiliar+n;
-                    n = n - 5;
-                    contador = contador + 1;
-
-                }
-                if ((n - 5 == 0 && contador < 3) && 5+n!=9) {
-                    
-                    n = n - 5;
-                    sol = sol + "V";
-                }
-                if (contador > 3 || auxiliar+1==10) {
-                    sol = sol + "IX";
-                    n=n-9;
-                } else {
-                    for (int x = 0; x < contador; x++) {
-                        sol = sol + "V";
-                    }
-                }
-                contador = 0;
-                while ((n - 1) > 0) {
-                    n = n - 1;
-                    contador = contador + 1;
-
-                }
-
-                if (n - 1 == 0 && contador < 3) {
-                    n = n - 1;
-                    sol = sol + "I";
-                }
-                if (contador > 3 || n == 1) {
-                    sol = sol + "IV";
-                } else {
-                    for (int x = 0; x < contador; x++) {
-                        sol = sol + "I";
-                    }
-                    contador = 0;
-
-                }
-
+        }
+        if (n - 10 == 0 && contador < 3) {
+            n = n - 10;
+            sol = sol + "X";
+        }
+        if (contador > 3) {
+            sol = sol + "XL";
+        } else {
+            for (int x = 0; x < contador; x++) {
+                sol = sol + "X";
             }
+        }
+        contador = 0;
+        while ((n - 5) > 0) {
+            auxiliar = auxiliar + n;
+            n = n - 5;
+            contador = contador + 1;
+
+        }
+        if ((n - 5 == 0 && contador < 3) && 5 + n != 9) {
+
+            n = n - 5;
+            sol = sol + "V";
+        }
+        if (contador > 3 || auxiliar + 1 == 10) {
+            sol = sol + "IX";
+            n = n - 9;
+        } else {
+            for (int x = 0; x < contador; x++) {
+                sol = sol + "V";
+            }
+        }
+        contador = 0;
+        auxiliar = 0;
+        while ((n - 1) > 0) {
+            n = n - 1;
+            contador = contador + 1;
+
+        }
+
+        if (n - 1 == 0 && contador < 3) {
+            n = n - 1;
+            sol = sol + "I";
+        }
+        if (contador > 3 || n == 1) {
+            sol = sol + "IV";
+        } else {
+            for (int x = 0; x < contador; x++) {
+                sol = sol + "I";
+            }
+            contador = 0;
+
         }
         System.out.println(sol);
     }
